@@ -1,0 +1,33 @@
+
+<div class="modal fade show"   id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog" [formGroup]="formGroup">
+    <div class="modal-content" >
+      <div class="modal-header" >
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za</h5>
+        <button type="button" class="btn-close"  aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <div class="mb-3">
+          <label class="form-label">Ime</label>
+          <input class="form-control" type="text"  placeholder="Ime" formControlName="Ime">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prezime</label>
+          <input class="form-control" placeholder="Prezime" formControlName="Prezime"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Opstina rodjenja ID</label>
+          <select class="form-control"  placeholder="Opstina rodjenja" formControlName="OpstinaRodjenjaId">
+            <option *ngFor="let opstina of opstine" [value]="opstina.id">{{opstina.opis}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeMod()" >Close</button>
+        <button type="button" class="btn btn-primary" (click)="add()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

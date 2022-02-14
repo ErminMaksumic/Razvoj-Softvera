@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule} from "@angular/forms"
 import { AppComponent } from './app.component';
 import { HttpClientModule} from "@angular/common/http";
-import { StudentiComponent } from './studenti/studenti.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
@@ -21,10 +20,16 @@ import { HomeNastavnikComponent } from './home-nastavnik/home-nastavnik.componen
 import { HomeAdministratorComponent } from './home-administrator/home-administrator.component';
 import { StudentMaticnaknjigaComponent } from './student-maticnaknjiga/student-maticnaknjiga.component';
 import { ChartsModule } from 'ng2-charts';
+import { NoviStudentComponent } from './studenti/novi-student/novi-student.component';
+import { StudentiComponent } from './studenti/studenti.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
+import { EditStudentComponent } from './studenti/edit-student/edit-student.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    StudentiComponent,
     LoginComponent,
     RegistracijaComponent,
     HomeStudentComponent,
@@ -36,6 +41,10 @@ import { ChartsModule } from 'ng2-charts';
     HomeNastavnikComponent,
     HomeAdministratorComponent,
     StudentMaticnaknjigaComponent,
+    NoviStudentComponent,
+    StudentiComponent,
+    EditStudentComponent
+
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,8 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     HttpClientModule,
     ChartsModule,
+    CommonModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AutorizacijaAdminProvjera,

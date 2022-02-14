@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pc\\Desktop\\RS - Ispit\\vjezbe14_primjerispita\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
+    "C:\\Users\\pc\\Desktop\\RS - Ispit\\Vjezbe\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pc\\Desktop\\RS - Ispit\\vjezbe14_primjerispita\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
+    "C:\\Users\\pc\\Desktop\\RS - Ispit\\Vjezbe\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pc\\Desktop\\RS - Ispit\\vjezbe14_primjerispita\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "projectUniqueName": "C:\\Users\\pc\\Desktop\\RS - Ispit\\Vjezbe\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
         "projectName": "FIT_Api_Examples",
-        "projectPath": "C:\\Users\\pc\\Desktop\\RS - Ispit\\vjezbe14_primjerispita\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "projectPath": "C:\\Users\\pc\\Desktop\\RS - Ispit\\Vjezbe\\API\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pc\\Desktop\\RS - Ispit\\vjezbe14_primjerispita\\API\\FIT_Api_Examples\\obj\\",
+        "outputPath": "C:\\Users\\pc\\Desktop\\RS - Ispit\\Vjezbe\\API\\FIT_Api_Examples\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",

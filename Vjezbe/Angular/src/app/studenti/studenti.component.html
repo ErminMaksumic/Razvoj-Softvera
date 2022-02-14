@@ -1,9 +1,9 @@
 <p>studenti works!</p>
 
 <p>
-  Filter by ime i prezime <input >
+  Filter by ime i prezime <input [(ngModel)]="filter">
 </p>
-<table class="table table-warning">
+<table class="table table-warning" *ngIf="studenti">
   <tr>
     <th>ID</th>
     <th>Ime</th>
@@ -16,12 +16,24 @@
     <th>Akcija</th>
   </tr>
   <tbody>
-    
+  <tr *ngFor="let student of filtriraj()">
+    <td>{{student.id}}</td>
+    <td>{{student.ime}}</td>
+    <td>{{student.prezime}}</td>
+    <td>{{student.broj_indeksa}}</td>
+    <td>{{student.opstina_rodjenja.drzava.naziv}}</td>
+    <td>{{student.opstina_rodjenja.opis}}</td>
+    <td>{{student.created_time}}</td>
+    <td>X</td>
+    <td><button class="btn btn-primary" (click)="update(student)">Edit</button></td>
+  </tr>
   </tbody>
 </table>
 
-<button class="form-label">Novi student</button>
+<button class="form-label" (click)="setBoolNew()">Novi student</button>
 
-
+<app-novi-student *ngIf="showNewStudentModal" (closeModal)="showNewStudentModal=false" (refresh)="loadStudents()"></app-novi-student>
+<app-edit-student *ngIf="showEditStudentModal" [editStudent]="showEditStudentModal"
+                  (closeModal)="showEditStudentModal=null" (refresh)="loadStudents()"></app-edit-student>
 
 
