@@ -15,6 +15,11 @@ export class StudentService {
     return this.http.get(this.url + 'GetAll', MojConfig.http_opcije());
   }
 
+  getById(id: number)
+  {
+    return this.http.get(this.url + `GetById?id=${id}`, MojConfig.http_opcije());
+  }
+
   addStudent(s:any)
   {
     return this.http.post(this.url + 'Add', s,  MojConfig.http_opcije());
@@ -23,5 +28,10 @@ export class StudentService {
   update(s:any)
   {
     return this.http.put(this.url + 'Edit', s,  MojConfig.http_opcije());
+  }
+
+  getAkGodine()
+  {
+    return this.http.get('https://localhost:44326/akademskegodine/GetAll', MojConfig.http_opcije());
   }
 }

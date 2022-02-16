@@ -35,7 +35,7 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
             {
                 akademskaGodina = new AkademskaGodina()
                 {
-                   opis= x.opis,
+                   opis= x.Opis,
                    datum_added = DateTime.Now,
                     evidentiraoKorisnik = HttpContext.GetLoginInfo().korisnickiNalog,
                 };
@@ -50,7 +50,7 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
                 akademskaGodina.izmijenioKorisnik = HttpContext.GetLoginInfo().korisnickiNalog;
             }
 
-            akademskaGodina.opis = x.opis;
+            akademskaGodina.opis = x.Opis;
            
                 
             _dbContext.SaveChanges();

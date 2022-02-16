@@ -50,6 +50,16 @@ namespace FIT_Api_Examples.Modul2.Controllers
             return _dbContext.Student.Include(x=> x.opstina_rodjenja).ThenInclude(x=> x.drzava).ToList();
         }
 
+        [HttpGet]
+        public ActionResult<Student> GetById(int id)
+        {
+            var student = _dbContext.Student.SingleOrDefault(x => x.id == id);
+            if (student == null)
+                return NotFound();
+
+            return Ok(student);
+        }
+
         [HttpPost]
         public ActionResult<int> Add([FromBody] StudentVM student)
         {
@@ -91,7 +101,6 @@ namespace FIT_Api_Examples.Modul2.Controllers
             _dbContext.SaveChanges();
 
             return Ok();
-
         }
 
 

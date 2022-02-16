@@ -1,59 +1,59 @@
-<p>student-maticnaknjiga works!</p>
-
-<div >
-
-  <div class="mb-3 row">
+<div *ngIf="student"  [formGroup]="studentForm" >
+<div class="mb-3 row">
     <label class="col-sm-2 col-form-label">Student ID</label>
+    <div class="col-sm-4" >
+      <input readonly class="form-control" formControlName="StudentId">
+    </div>
+  </div>
+
+  <div class="mb-3 row" >
+    <label class="col-sm-2 col-form-label">Student ime</label>
     <div class="col-sm-4">
-      <input disabled class="form-control" >
+      <input readonly class="form-control" formControlName="StudentIme">
     </div>
   </div>
 
   <div class="mb-3 row">
-      <label class="col-sm-2 col-form-label">Student ime</label>
-        <div class="col-sm-4">
-      <input disabled class="form-control" >
+    <label class="col-sm-2 col-form-label">Student prezime</label>
+    <div class="col-sm-4">
+      <input readonly class="form-control" formControlName="StudentPrezime">
     </div>
   </div>
 
-  <div class="mb-3 row">
-      <label class="col-sm-2 col-form-label">Student prezime</label>
-        <div class="col-sm-4">
-      <input disabled class="form-control" >
-    </div>
-  </div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ak godina</th>
+      <th>Godina</th>
+      <th>Obnova</th>
+      <th>Zimski semestar<br>
+        <input value="Upis" disabled> |
+        <input value="Ovjera" disabled>
+      </th>
+      <th>Evidentirao</th>
+      <th>Akcija</th>
+    </tr>
+    </thead>
 
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Ak godina</th>
-    <th>Godina</th>
-    <th>Obnova</th>
-    <th>Zimski semestar<br>
-      <input value="Upis" disabled> |
-      <input value="Ovjera" disabled>
-    </th>
-    <th>Ljetni semestar<br>
-       <input value="Upis" disabled> |
-      <input value="Ovjera" disabled>
-    </th>
-    <th>Evidentirao</th>
-    <th>Akcija</th>
-  </tr>
-  </thead>
+    <tbody>
+    <tr *ngFor="let godina of studentGodine">
+      <td>{{godina.id}}</td>
+      <td>{{godina.akademskaGodina.opis}}</td>
+      <td>{{godina.godinaStudija}}</td>
+      <td>{{godina.obnovaGodine}}</td>
+      <td>{{godina.datum1_ZimskiUpis}}</td>
+      <td>{{godina.evidentiraoKorisnik.korisnickoIme}}</td>
+    </tr>
+    </tbody>
+  </table>
 
-  <tbody>
-  
-  </tbody>
-</table>
-
-<button class="form-label">Upis u zimski semestar</button>
+  <button class="form-label" (click)=showModall()>Upis u zimski semestar</button>
 </div>
 
 
-<div class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
+<div class="modal fade show" *ngIf="showModal" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog" [formGroup]="godinaForm">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za</h5>
@@ -62,34 +62,34 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Datum</label>
-          <input class="form-control" type="date"  placeholder="Datum">
+          <input class="form-control" type="date"  placeholder="Datum" formControlName="Datum">
         </div>
         <div class="mb-3">
           <label class="form-label">Godina studija</label>
-          <input class="form-control" [placeholder="Godina studija"/>
+          <input class="form-control" placeholder="Godina studija" formControlName="GodinaStudija"/>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Ak godina</label>
-          <select class="form-control"  placeholder="Akg godina">
-            <option></option>
+          <select class="form-control"  placeholder="Akg godina" formControlName="AkademskaGodinaId">
+            <option *ngFor="let godina of akGodine" [value]="godina.id">{{godina.opis}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">cijenaSkolarine</label>
-          <input class="form-control"  placeholder="cijenaSkolarine" />
+          <input class="form-control"  placeholder="cijenaSkolarine" formControlName="CijenaSkolarine" />
         </div>
 
         <div class="mb-3 form-check">
-          <input   type="checkbox" class="form-check-input" placeholder="obnovaGodine" />
+          <input   type="checkbox" class="form-check-input" placeholder="obnovaGodine" formControlName="ObnovaGodine" />
           <label class="form-check-label">obnovaGodine</label>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" >Close</button>
-        <button type="button" class="btn btn-primary" >Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)=closeModal() >Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()">Save changes</button>
       </div>
     </div>
   </div>

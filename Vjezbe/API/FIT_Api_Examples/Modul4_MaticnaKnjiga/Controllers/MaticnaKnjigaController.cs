@@ -25,5 +25,39 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         {
             this._dbContext = dbContext;
         }
+
+        [HttpPost]
+        public ActionResult AddGodina(int id, [FromBody] AkademskagodinaAddVM a)
+        {
+
+            if (_dbContext.UpisUAkGodinu.Where(x => x.godinaStudija == a.GodinaStudija && a.ObnovaGodine == false).Count()>0)
+                return BadRequest("Ne mozete dodati istu godinu bez obnove!");
+
+
+            _dbContext.UpisUAkGodinu.Add(new UpisUAkGodinu()
+            {
+                datum1_ZimskiUpis = a.Datum,
+                cijenaSkolarine = a.CijenaSkolarine,
+                akademskaGodinaId = a.AkademskaGodinaId,
+                obnovaGodine = a.ObnovaGodine,
+                godinaStudija = a.GodinaStudija,
+                studentId = id,
+                evidentiraoKorisnik = HttpContext.GetLoginInfo().korisnickiNalog
+            });;
+
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+
+        [HttpGet]
+        public ActionResult GetByStudent(int id)
+        {
+            var student = _dbContext.UpisUAkGodinu.Include(x=>x.evidentiraoKorisnik).Include(x=>x.akademskaGodina).Where(x => x.studentId == id).ToList();
+
+            if (student == null)
+                return NotFound();
+
+            return Ok(student);
+        }
     }
 }
