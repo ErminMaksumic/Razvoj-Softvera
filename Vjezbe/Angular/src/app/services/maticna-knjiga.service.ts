@@ -12,11 +12,18 @@ export class MaticnaKnjigaService {
 
   addGodina(studentId: number, data: any)
   {
+    console.log(data);
     return this.http.post(this.url + `AddGodina?id=${studentId}`, data, MojConfig.http_opcije());
   }
 
   getByStudent(studentId: number)
   {
     return this.http.get(this.url + `GetByStudent?id=${studentId}`, MojConfig.http_opcije());
+  }
+
+  ovjeriSemestar(godinaId: number)
+  {
+    console.log(godinaId);
+    return this.http.post(this.url + `ovjerisemestar`, godinaId, MojConfig.http_opcije());
   }
 }

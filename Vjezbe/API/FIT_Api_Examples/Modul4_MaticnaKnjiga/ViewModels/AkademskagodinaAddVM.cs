@@ -12,6 +12,6 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.ViewModels
         public int GodinaStudija { get; set; }
         public int AkademskaGodinaId { get; set; }
         public float CijenaSkolarine { get; set; }
-        public bool ObnovaGodine { get; set; }
+        public bool obnovaGodine { get; set; }
     }
 }

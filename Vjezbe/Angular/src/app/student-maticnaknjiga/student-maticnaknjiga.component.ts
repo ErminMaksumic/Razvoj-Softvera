@@ -29,13 +29,30 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.createGodineForm();
+    this.studentForm = this.builder.group({
+      StudentId: [this.studentId],
+      StudentIme: [''],
+      StudentPrezime: ['']
+    });
 
-      this.getStudentInfo();
-      this.getAkGodine();
-      this.createStudentInfoForm();
-      this.createAddGodinaForm();
-      this.loadInformations();
-    }
+    this.getAkGodine();
+    this.getStudentInfo();
+    this.loadInformations();
+
+
+  }
+
+  createGodineForm()
+  {
+    this.godinaForm = this.builder.group({
+      Datum: [''],
+      GodinaStudija: [0],
+      AkademskaGodinaId: [0],
+      CijenaSkolarine: [0],
+      obnovaGodine: [false]
+    });
+  }
 
 
     getStudentInfo()
@@ -51,26 +68,6 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
         })
       })
     }
-
-
-  createStudentInfoForm()
-  {
-    this.studentForm = this.builder.group({
-      StudentId: [this.studentId],
-      StudentIme: [''],
-      StudentPrezime: ['']
-    });
-  }
-  createAddGodinaForm()
-  {
-    this.godinaForm = this.builder.group({
-      Datum: [''],
-      GodinaStudija: [0],
-      AkademskaGodinaId: [0],
-      CijenaSkolarine: [0],
-      ObnovaGodine: [0]
-    });
-  }
 
   getAkGodine()
   {
@@ -98,19 +95,28 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
 
    saveChanges()
    {
-     this.maticnaKnjigaService.addGodina(this.studentId, this.godinaForm.value).subscribe(()=>
+     console.log(this.godinaForm.value);
+     this.maticnaKnjigaService.addGodina(this.studentId, this.godinaForm.value).subscribe((x)=>
      {
        porukaSuccess("Dodata godina!");
+       console.log(this.godinaForm.value);
        this.loadInformations();
-       this.godinaForm.reset();
        this.showModal=false;
+       this.godinaForm.reset();
+       this.createGodineForm();
      },
        err=>
        {
          porukaError("Ne mozete dodati postojecu godinu bez obnove!");
-         this.godinaForm.reset();
-         this.showModal=false;
        })
+   }
+
+   ovjeriSemestar(g: any)
+   {
+      this.maticnaKnjigaService.ovjeriSemestar(g.id).subscribe(x=>
+      {
+        this.loadInformations();
+      })
    }
 
    showModall()
@@ -121,6 +127,8 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
    closeModal()
    {
      this.showModal = false;
+     this.godinaForm.reset();
+     this.createGodineForm();
    }
 
   ngOnDestroy() {

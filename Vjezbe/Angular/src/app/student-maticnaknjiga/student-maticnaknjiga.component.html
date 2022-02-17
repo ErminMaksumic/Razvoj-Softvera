@@ -42,8 +42,12 @@
       <td>{{godina.akademskaGodina.opis}}</td>
       <td>{{godina.godinaStudija}}</td>
       <td>{{godina.obnovaGodine}}</td>
-      <td>{{godina.datum1_ZimskiUpis}}</td>
+      <td>{{godina.datum1_ZimskiUpis | date }} | {{godina.datum2_ZimskiOvjera | date }}
+    </td>
       <td>{{godina.evidentiraoKorisnik.korisnickoIme}}</td>
+      <td>
+        <button class="btn-info" (click)="ovjeriSemestar(godina)" *ngIf="godina.datum2_ZimskiOvjera==null"
+        >Ovjeri semestar</button></td>
     </tr>
     </tbody>
   </table>
@@ -82,7 +86,7 @@
         </div>
 
         <div class="mb-3 form-check">
-          <input   type="checkbox" class="form-check-input" placeholder="obnovaGodine" formControlName="ObnovaGodine" />
+          <input type="checkbox" class="form-check-input" placeholder="obnovaGodine" formControlName="obnovaGodine" />
           <label class="form-check-label">obnovaGodine</label>
         </div>
 

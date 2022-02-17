@@ -29,8 +29,10 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         [HttpPost]
         public ActionResult AddGodina(int id, [FromBody] AkademskagodinaAddVM a)
         {
+            var student = _dbContext.Student.SingleOrDefault(x => x.id == id);
 
-            if (_dbContext.UpisUAkGodinu.Where(x => x.godinaStudija == a.GodinaStudija && a.ObnovaGodine == false).Count()>0)
+            if (_dbContext.UpisUAkGodinu.Where(x => x.godinaStudija == a.GodinaStudija
+            && student.id == id && a.obnovaGodine == false).Count()>0)
                 return BadRequest("Ne mozete dodati istu godinu bez obnove!");
 
 
@@ -39,7 +41,7 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
                 datum1_ZimskiUpis = a.Datum,
                 cijenaSkolarine = a.CijenaSkolarine,
                 akademskaGodinaId = a.AkademskaGodinaId,
-                obnovaGodine = a.ObnovaGodine,
+                obnovaGodine = a.obnovaGodine,
                 godinaStudija = a.GodinaStudija,
                 studentId = id,
                 evidentiraoKorisnik = HttpContext.GetLoginInfo().korisnickiNalog
@@ -58,6 +60,19 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
                 return NotFound();
 
             return Ok(student);
+        }
+
+        [HttpPost]
+        public ActionResult OvjeriSemestar([FromBody] int godinaId)
+        {
+            var godina = _dbContext.UpisUAkGodinu.SingleOrDefault(x => x.id == godinaId);
+
+            if(godina!=null)
+            {
+                godina.datum2_ZimskiOvjera = DateTime.Now;
+                return Ok(_dbContext.SaveChanges());
+            }
+            return NotFound();
         }
     }
 }
