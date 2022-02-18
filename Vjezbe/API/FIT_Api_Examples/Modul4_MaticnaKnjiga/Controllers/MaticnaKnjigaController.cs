@@ -29,6 +29,9 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         [HttpPost]
         public ActionResult AddGodina(int id, [FromBody] AkademskagodinaAddVM a)
         {
+            if (HttpContext.GetLoginInfo().isLogiran)
+                return Unauthorized();
+
             var student = _dbContext.Student.SingleOrDefault(x => x.id == id);
 
             if (_dbContext.UpisUAkGodinu.Where(x => x.godinaStudija == a.GodinaStudija
@@ -54,6 +57,9 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         [HttpGet]
         public ActionResult GetByStudent(int id)
         {
+            if (HttpContext.GetLoginInfo().isLogiran)
+                return Unauthorized();
+
             var student = _dbContext.UpisUAkGodinu.Include(x=>x.evidentiraoKorisnik).Include(x=>x.akademskaGodina).Where(x => x.studentId == id).ToList();
 
             if (student == null)
