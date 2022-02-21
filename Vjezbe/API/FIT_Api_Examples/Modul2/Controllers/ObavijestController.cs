@@ -28,8 +28,11 @@ namespace FIT_Api_Examples.Modul2.Controllers
         [HttpPost("{id}")]
         public ActionResult<Obavijest> Snimi(int id, [FromBody] ObavijestAddVM x)
         {
-            if (!HttpContext.GetLoginInfo().isPermisijaProdekan)
-                return BadRequest("nije logiran");
+            if (!HttpContext.GetLoginInfo().isLogiran)
+            {
+                return Unauthorized();
+            }
+
 
             Obavijest obavijest;
             if (id == 0)

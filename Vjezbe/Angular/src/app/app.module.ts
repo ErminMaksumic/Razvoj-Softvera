@@ -25,6 +25,7 @@ import { StudentiComponent } from './studenti/studenti.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import { EditStudentComponent } from './studenti/edit-student/edit-student.component';
+import { ObavijestiComponent } from './obavijesti/obavijesti/obavijesti.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { EditStudentComponent } from './studenti/edit-student/edit-student.compo
     StudentMaticnaknjigaComponent,
     NoviStudentComponent,
     StudentiComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    ObavijestiComponent
 
   ],
   imports: [
@@ -54,6 +56,8 @@ import { EditStudentComponent } from './studenti/edit-student/edit-student.compo
       {path: 'registracija', component: RegistracijaComponent},
       {path: 'student-maticnaknjiga/:id', component: StudentMaticnaknjigaComponent, canActivate: [AutorizacijaStudentskaSluzbaProvjera]},
       {path: 'home', component: HomeComponent},
+      {path: 'obavijesti', component: ObavijestiComponent},
+
       {path: '**', component: NotFoundComponent, canActivate: [AutorizacijaLoginProvjera]},
     ]),
     FormsModule,

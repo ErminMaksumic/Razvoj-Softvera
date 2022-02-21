@@ -1,0 +1,57 @@
+
+<p>obavijesti works!</p>
+
+<table class="table table-warning">
+  <tr>
+    <th>ID</th>
+    <th>Naslov</th>
+    <th>Tekst</th>
+    <th>Created</th>
+    <th>Modified</th>
+    <th>Akcija</th>
+  </tr>
+  <tbody>
+  <tr *ngFor="let s of obavijesti">
+    <td>{{s.id}}</td>
+    <td>{{s.naslov}}</td>
+    <td>{{s.tekst}}</td>
+    <td>{{s.evidentiraoKorisnik.korisnickoIme}} {{s.datum_kreiranja}}</td>
+    <td>{{s.izmijenioKorisnik!=null?s.izmijenioKorisnik.korisnickoIme:""}} {{s.datum_update!=null?s.datum_update:""}}</td>
+    <td>
+      <button (click)="delete(s.id)">Obrisi</button>
+      <button (click)="edit(s.id)">Edit</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<button class="form-label" (click)="showModal = true">Nova obavijest</button>
+
+
+<div [formGroup]="formGroup" *ngIf="showModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+        <button type="button" class="btn-close" aria-label="Close"  (click)="closeAndClearModal()" ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Naslov</label>
+          <input class="form-control"  placeholder="Naslov" formControlName="naslov">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Tekst</label>
+          <textarea class="form-control" placeholder="Tekst" rows="30" cols="120" formControlName="sadrzaj">
+          </textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeAndClearModal()" >Close</button>
+        <button type="button" class="btn btn-primary" *ngIf="id==-1" (click)="add()" >Save changes [New]</button>
+        <button type="button" class="btn btn-primary" *ngIf="id!=-1" (click)="saveEdit()" >Save changes [Edit]</button>
+      </div>
+    </div>
+  </div>
+</div>
