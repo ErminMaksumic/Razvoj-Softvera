@@ -32,7 +32,6 @@ export class StudentiComponent implements OnInit {
   {
     this.studentService.getAll().subscribe((x:any) => {
       this.studenti = x;
-      console.log(this.studenti);
     })
   }
   setBoolNew()

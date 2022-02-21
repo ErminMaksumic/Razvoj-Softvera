@@ -29,13 +29,13 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         [HttpPost]
         public ActionResult AddGodina(int id, [FromBody] AkademskagodinaAddVM a)
         {
-            if (HttpContext.GetLoginInfo().isLogiran)
+            if (!HttpContext.GetLoginInfo().isLogiran)
                 return Unauthorized();
 
             var student = _dbContext.Student.SingleOrDefault(x => x.id == id);
 
             if (_dbContext.UpisUAkGodinu.Where(x => x.godinaStudija == a.GodinaStudija
-            && student.id == id && a.obnovaGodine == false).Count()>0)
+            && student.id == x.studentId && a.obnovaGodine == false).Count()>0)
                 return BadRequest("Ne mozete dodati istu godinu bez obnove!");
 
 
@@ -57,7 +57,7 @@ namespace FIT_Api_Examples.Modul4_MaticnaKnjiga.Controllers
         [HttpGet]
         public ActionResult GetByStudent(int id)
         {
-            if (HttpContext.GetLoginInfo().isLogiran)
+            if (!HttpContext.GetLoginInfo().isLogiran)
                 return Unauthorized();
 
             var student = _dbContext.UpisUAkGodinu.Include(x=>x.evidentiraoKorisnik).Include(x=>x.akademskaGodina).Where(x => x.studentId == id).ToList();

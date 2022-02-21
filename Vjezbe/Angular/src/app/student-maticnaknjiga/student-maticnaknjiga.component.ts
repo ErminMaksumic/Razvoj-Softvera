@@ -31,7 +31,7 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
 
     this.createGodineForm();
     this.studentForm = this.builder.group({
-      StudentId: [this.studentId],
+      StudentId: [0],
       StudentIme: [''],
       StudentPrezime: ['']
     });
@@ -80,10 +80,9 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
 
   loadInformations()
     {
-      this.maticnaKnjigaService.getByStudent(this.studentId).subscribe((x:any)=>
+      this.sub = this.maticnaKnjigaService.getByStudent(this.studentId).subscribe((x:any)=>
       {
         this.studentGodine = x;
-        console.log(this.studentGodine);
       })
     }
 
@@ -91,15 +90,14 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
     {
       this.studentForm.get('StudentIme').patchValue(this.student.ime);
       this.studentForm.get('StudentPrezime').patchValue(this.student.prezime);
+      this.studentForm.get('StudentId').patchValue(this.student.id);
     }
 
    saveChanges()
    {
-     console.log(this.godinaForm.value);
      this.maticnaKnjigaService.addGodina(this.studentId, this.godinaForm.value).subscribe((x)=>
      {
        porukaSuccess("Dodata godina!");
-       console.log(this.godinaForm.value);
        this.loadInformations();
        this.showModal=false;
        this.godinaForm.reset();
@@ -134,7 +132,5 @@ export class StudentMaticnaknjigaComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-
 
 }

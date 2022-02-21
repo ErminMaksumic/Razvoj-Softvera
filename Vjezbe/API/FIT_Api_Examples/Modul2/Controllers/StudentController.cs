@@ -36,7 +36,7 @@ namespace FIT_Api_Examples.Modul2.Controllers
         [HttpGet]
         public ActionResult<PagedList<Student>> GetAllPaged(string ime_prezime, int items_per_page, int page_number = 1)
         {
-            if (HttpContext.GetLoginInfo().isLogiran)
+            if (!HttpContext.GetLoginInfo().isLogiran)
                 return Unauthorized();
 
             var data = _dbContext.Student
@@ -55,7 +55,7 @@ namespace FIT_Api_Examples.Modul2.Controllers
         [HttpGet]
         public ActionResult<Student> GetById(int id)
         {
-            if (HttpContext.GetLoginInfo().isLogiran)
+            if (!HttpContext.GetLoginInfo().isLogiran)
                 return Unauthorized();
 
             var student = _dbContext.Student.SingleOrDefault(x => x.id == id);
@@ -95,7 +95,7 @@ namespace FIT_Api_Examples.Modul2.Controllers
         [HttpPut]
         public ActionResult Edit([FromBody] StudentVM xs)
         {
-            if (HttpContext.GetLoginInfo().isLogiran)
+            if (!HttpContext.GetLoginInfo().isLogiran)
                 return Unauthorized();
 
             var student = _dbContext.Student.SingleOrDefault(x => x.id == xs.Id);
